@@ -25,8 +25,9 @@ def start(update: Update, context: CallbackContext):
 
     # send welcome message
     fullname = update.message.from_user.full_name
+    update.message.reply_html(text=f'hello, <b>{fullname}</b>\n<i>Welcome to our bot!</i>',)
     update.message.reply_html(
-        text=f'hello, <b>{fullname}</b>\n<i>Welcome to our bot!</i>',
+        text='press one of the buttons',
         reply_markup=reply_markup
         )
 
