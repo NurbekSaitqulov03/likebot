@@ -1,5 +1,11 @@
 from telegram.ext import CallbackContext
-from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
+from telegram import (
+    Update, 
+    ReplyKeyboardMarkup, 
+    KeyboardButton, 
+    InlineKeyboardMarkup,
+    InlineKeyboardButton,
+)
 from db import DB
 
 db = DB()
@@ -10,11 +16,13 @@ def start(update: Update, context: CallbackContext):
     db.add(chat_id)
     
     # keyboard
-    keyboard = [
-        [KeyboardButton(text='👍'), KeyboardButton(text='👎')]
+    btn1 = InlineKeyboardButton(text='👍', callback_data='1')
+    btn2 = InlineKeyboardButton(text='👍', callback_data='2')
+    inline_keyboard = [
+        [btn1, btn2]
     ]
-    reply_markup = ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True, one_time_keyboard=True)
-    
+    reply_markup = InlineKeyboardMarkup(inline_keyboard=inline_keyboard)
+
     # send welcome message
     fullname = update.message.from_user.full_name
     update.message.reply_html(
