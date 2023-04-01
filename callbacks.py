@@ -27,4 +27,8 @@ def start(update: Update, context: CallbackContext):
 def like_or_dislike(update: Update, context: CallbackContext):
     # increase like
     data = update.callback_query.data
-    print(data)
+    chat_id = update.callback_query.from_user.id
+    if data == 'like button':
+        context.bot.send_message(chat_id, 'siz like bosdingiz')
+    if data == 'dislike button':
+        context.bot.send_message(chat_id, 'siz dislike bosdingiz')
