@@ -1,9 +1,8 @@
 import os
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
+from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler
 from callbacks import (
     start,
-    like,
-    dislike
+    like_or_dislike,
 )
 
 TOKEN = os.environ.get('TOKEN')
@@ -17,8 +16,7 @@ def main():
 
     # handlers
     dispatcher.add_handler(handler=CommandHandler(command='start', callback=start))
-    dispatcher.add_handler(handler=MessageHandler(filters=Filters.text('👍'), callback=like))
-    dispatcher.add_handler(handler=MessageHandler(filters=Filters.text('👎'), callback=dislike))
+    dispatcher.add_handler(handler=CallbackQueryHandler(callback=like_or_dislike))
 
     # satrt polling
     updater.start_polling()
